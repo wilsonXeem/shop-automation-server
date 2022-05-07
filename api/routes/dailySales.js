@@ -4,5 +4,6 @@ const dailySalesController = require("../controllers/dailySales");
 
 router.get("/", dailySalesController.getAllSales);
 router.post("/", dailySalesController.createOneSale);
+router.delete("/:_id", dailySalesController.deleteOneSale);
 
 module.exports = router;

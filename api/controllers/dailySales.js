@@ -76,6 +76,25 @@ exports.createOneSale = async (req, res, next) => {
   }
 };
 
+// Delete One Sale
+exports.deleteOneSale = async (req, res, next) => {
+  const id = req.params._id;
+  await DailySales.findByIdAndDelete(id)
+    .then((sale) => {
+      res.status(200).json({
+        message: "Product deleted Succefully",
+        sale: {
+          _id: sale._id,
+          name: sale.name,
+          rate: sale.rate,
+          quantity: sale.quantity,
+          remarks: sale.remarks,
+        },
+      });
+    })
+    .catch((error) => next(error));
+};
+
 const ceateSale = (req) => {
   return new DailySales({
     _id: new mongoose.Types.ObjectId(),

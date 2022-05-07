@@ -67,6 +67,24 @@ exports.createOnePurchase = async (req, res, next) => {
   }
 };
 
+// Delete One Product
+exports.deleteOnePurchase = async (req, res, next) => {
+  const id = req.params._id;
+  await Purchases.findByIdAndDelete(id)
+    .then((purchase) => {
+      res.status(200).json({
+        message: "Purchase deleted Succefully",
+        purchase: {
+          _id: purchase._id,
+          name: purchase.name,
+          unitCost: purchase.unitCost,
+          quantity: Number(purchase.quantity),
+        },
+      });
+    })
+    .catch((error) => next(error));
+};
+
 const createPurchase = (req) => {
   return new Purchases({
     _id: new mongoose.Types.ObjectId(),

@@ -40,6 +40,24 @@ exports.createExpense = async (req, res, next) => {
     .catch((error) => next(error));
 };
 
+// Delete One Product
+exports.deleteOneExpense = async (req, res, next) => {
+  const id = req.params._id;
+  await Expenses.findByIdAndDelete(id)
+    .then((purchase) => {
+      res.status(200).json({
+        message: "Expense deleted Succefully",
+        purchase: {
+          _id: purchase._id,
+          name: purchase.name,
+          unitCost: purchase.unitCost,
+          quantity: Number(purchase.quantity),
+        },
+      });
+    })
+    .catch((error) => next(error));
+};
+
 const createExpense = (req) => {
   return new Expenses({
     _id: new mongoose.Types.ObjectId(),
