@@ -9,7 +9,7 @@ const dailySalesRoutes = require("./api/routes/dailySales");
 const expenseRoutes = require("./api/routes/expenses");
 
 mongoose.connect(
-  "mongodb+srv://agroshop:1agro2shop@cluster0.yrqgc.mongodb.net/agroshop?retryWrites=true&w=majority"
+  "mongodb+srv://anonymous:anonymous@cluster0.3hdvk.mongodb.net/?retryWrites=true&w=majority"
 );
 
 const app = express();
@@ -54,5 +54,5 @@ app.use((error, req, res, next) => {
   res.status(error.status || 500).json({ error: error.message });
 });
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 6000;
 app.listen(port, () => console.log("working"));
